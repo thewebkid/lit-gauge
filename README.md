@@ -1,5 +1,5 @@
 # \<lit-gauge>
-
+<img src="https://thewebkid.com/lit-gauge.png" width=600>
 A snazzy gauge to visualize telemetry. If I can wind my way through the 100s of different customizations, edge cases, error handling, tests... I will package this up on npm!
 
 
