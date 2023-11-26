@@ -13,21 +13,20 @@ npm i lit-gauge
 ```
 
 ## Usage Examples
-Declaratively set attributes inline like this:
+Here are examples using declarative inline attributes. These correspond to the gauges displayed in the screenshot. Styling examples are near the bottom of the readme.
 
 ```html
-
 <script type='module'>
   import {LitGauge} from 'lit-gauge';
 </script>
 <lit-gauge
-  id=small size="200"
+  id=lg1 size="200"
   scaleValues="0,5,20,65,80,90,100" scaleColors="#0909FB,#1EB3B3,#375a7f,#444,#777,#999"
   fluidcolors="true" ticks="5" minorTicks="5" value="40" valuePrecision="1"
 >
 </lit-gauge>
 <lit-gauge
-  id=large size="300"
+  id=lg2 size="300"
   scaleColors="blue,aqua,green,yellow,red"
   fluidcolors="true" ticks="10" minorTicks="5" value="60" label="AMPS"
   valuePrecision="1"
@@ -35,7 +34,7 @@ Declaratively set attributes inline like this:
 </lit-gauge>
 
 <lit-gauge
-  id=med size="250"
+  id=lg3 size="250"
   scaleValues="25000,40000,55000,65000,70000,75000"
   scaleColors="#999,#ccc,#D85F03,#a00,#ff7b7b"
   ticks="thresholds" value="60" label="RPM"
@@ -45,7 +44,7 @@ Declaratively set attributes inline like this:
 </lit-gauge>
 <br>
 <lit-gauge
-  id=white size="200"
+  id=lg4 size="200"
   scaleValues="0,5,20,65,80,90,100" scaleColors="#0909FB,#1EB3B3,#375a7f,#444,#777,#999"
   plain="true" ticks="5" minorTicks="5" value="40" valuePrecision="1"
 >  
@@ -71,7 +70,7 @@ Declaratively set attributes inline like this:
 - **scaleValues**: _String_ - `(scaleValues="0,10,50,90,100")` Sets the value ranges that will correspond with the color thresholds.
 - **scaleColors**: _String_ - `(scaleColors="#333,#888,#ccc")` Sets the colors that fill each value range. Must be exactly one value less than the scaleValues attrib. If you set a `scaleValue=0,10,20,30` then you have created 3 ranges (thresholds) that require a color. scaleColors=#333,#888,#ccc would set 0-10 to #333, 10-20 to #888, and 20-30 to #ccc. Use any valid css color string for each value.  
 - **fluidColors**: _Boolean_ - Shows a fluid gradient instead of hard stops for the color ranges.
-- **ticks**: _String_ - `(ticks="10")` Accepts either a numeric divisor (represents the total count of ranges created by the tick marks), or a csv value string representing custom value positions to place ticks (minor ticks will be disabled). Optionally you can enter ticks="thresholds" to place ticks on the scaleValues attrib values. The tick mark total will be one greater than the value you enter since the ranges are bounded on both sizes by marks.
+- **ticks**: _String_ - `(ticks="10")` Accepts either a numeric divisor (represents the total count of ranges created by the tick marks), or a csv value string representing custom value positions to place ticks (minor ticks will be disabled). Optionally you can enter `ticks="thresholds"` to place ticks on the scaleValues attrib values. The tick mark total will be one greater than the value you enter since the ranges are bounded on both sizes by marks.
 - **minorTicks**: _Number_ - `(minorTicks=5)` Available only when ticks is a numeric value. Subdivides each tick range by the specified value.
 - **value**: _Number_ - `(value=runtimeValue)` The runtime value that positions the needle and sets the runtime color value. 
 - **label**: _String_ - `(label=volts)` The runtime label to display below the value. If unspecified, the value moves upwards. Will make this much more configurable at some point.
@@ -116,9 +115,55 @@ lit-gauge{
 </style>
 ```
 
+## Styling examples
+These are the styles used to create the example screenshot in sequence
+```html
+<style>
+    
+    #lg1{
+      --outer-color:#000;
+      --hand-color:white;
+      --dial-background:black;
+    }
+    #lg2{
+      --hand-color: #ccc;
+      --dial-background:black;
+      --dial-gradient:radial-gradient(200px at 50.0% 10.0%,
+      rgba(55,55,55,1) 15%,
+      rgba(0,0,0,1) 70%,
+      rgba(0,0,0,0) 100%
+      );
+      --dial-shadow:none;
+    }
+    #lg3{
+      --outer-color:#400;
+      --dial-background:black;
+      --dial-gradient:radial-gradient(200px at 50.0% 10.0%,
+        rgba(55,55,55,1) 15%,
+        rgba(0,0,0,1) 70%,
+        rgba(0,0,0,0) 100%
+      );
+      --dial-border-width: 2px;
+      //--dial-border-color:red;
+      --dial-shadow:inset 0 -10px 30px #444;
+    }
+    #lg4{
+      --outer-color:transparent;
+      --label-color:black;
+      --dial-background:#fff;
+      --dial-shadow:none;
+      --tick-color:black;
+      --tick-label-color:white;
+      --hand-color: #333;
+      --tick-label-shadow:0 1px 1px black;
+      --label-bg:#ccc;
+    }
+  </style>
+```
 ## Run local
 ```bash
 npm dev
 ```
 
-I am open to work if you need a dev like me. Snatch me up. My portfolio and the link to my LinkedIn is on thewebkid.com :)
+## Need more help?
+I am open to work if you need a dev like me. Snatch me up. My portfolio and the link to my LinkedIn are on https://thewebkid.com :)
