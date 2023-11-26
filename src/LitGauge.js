@@ -19,7 +19,10 @@ export class LitGauge extends LitElement {
     tickLabels:{type:String},// optional
     thresholds:{type: Object},
     minorTicks: {type: Number},
-    minor: {type: Object}
+    minor: {type: Object},
+    plain: {type: Boolean},
+    valuePrecision: {type:Number},
+    options: {type:Object}
   };
 
   constructor() {
@@ -28,6 +31,8 @@ export class LitGauge extends LitElement {
     this.scaleValues = `0,10,20,70,80,90,100`;
     this.scaleColors = '#666, #888, green, yellow, orange, red';
     this.value = 0;
+    this.valuePrecision = 0;
+
     //this.fluidColors = true;
     this.ticks = '10';//'0,10,20,30,40,50,60,70,80,90,100';
     this.minorTicks = 5;
@@ -43,14 +48,15 @@ export class LitGauge extends LitElement {
 
   }
 
-  firstUpdated(){
-
+  initThresholds(debug){
     let {scaleValues,scaleColors,min,max, fluidColors} = this;
-    console.warn({fluidColors})
     const thresholdArgs = {
       values:scaleValues,
       colors:scaleColors,
       min, max, fluid:fluidColors
+    }
+    if (debug){
+      debugger
     }
     const errCallback = (type, message) => this.errorHandler(type,message);
     this.thresholds = Thresholds.fromScaleAttributes(thresholdArgs, errCallback);
@@ -58,12 +64,23 @@ export class LitGauge extends LitElement {
       this.ticks = this.tickAttr;
     }
   }
-  get fluidColors(){
-    return this._fluidColors;
+
+  willUpdate(props) {
+    if (props.has('options')){
+      console.log(this.options);
+      Object.entries(this.options).forEach(([k,v])=>{
+        this[k] = v;
+      });
+      this.initThresholds()
+    }
+
+    super.willUpdate(props);
   }
-  set fluidColors(v){
-    this._fluidColors = Boolean(v);
+
+  firstUpdated(){
+    this.initThresholds()
   }
+
   get ticks(){
     return this._ticks;
   }
@@ -157,28 +174,58 @@ export class LitGauge extends LitElement {
     return this.thresholds?.dataItem.spread;
   }
 
-  render() {
-
-    const {size, thresholds, value,ticks,minor} = this;
-    if (!thresholds){
-      return html``;
+  get outerClass(){
+    return {
+      'outer-gauge':true,
+      'no-lighting': this.plain
     }
-   ///debugger
-    const outerSize = {
+  }
+
+  get outerSize(){
+    let size = this.size;
+    return {
       height:px(size),
       width:px(size),
       padding: px((size / 40).toFixed(1))
     };
-    const fs = {
-      fontSize:this.tickSize,
-    }
-    const flipClass = (i,maj) => {
+  }
+
+  get flipClass(){
+    return (i,maj) => {
       return {
-        flip: !i || (maj && i === ticks.length - 1),
+        flip: !i || (maj && i === this.ticks.length - 1),
         tick:true,
         maj,minor:!maj
       }
-    };
+    }
+  }
+  get labelClass(){
+    return {
+      lbl: true,
+      plain: !this.label
+    }
+  }
+
+  get tickAt(){
+    return i=>{
+      if (this.tickLabels){
+        return this.tickLabels.split(',')[i]
+      }
+      let t = this.ticks[i]
+      return (Math.round(t.v * 10) / 10).toLocaleString();
+    }
+  }
+  render() {
+
+    const {flipClass, outerSize, thresholds, value,ticks,outerClass,labelClass} = this;
+    if (!thresholds){
+      return html``;
+    }
+
+    const fs = {
+      fontSize:this.tickSize,
+    }
+
     const tickStyle = (t,i) => {
       let {tickSize, transform} = this;
       return {
@@ -202,16 +249,12 @@ export class LitGauge extends LitElement {
       paddingBottom: px(3),
       ...fs
     }
-    const labelClass = {
-      lbl: true,
-      plain: !this.label
-    }
 
     return html`
-      <div class="outer-gauge" style=${styleMap(outerSize)}>
+      <div class=${classMap(outerClass)} style=${styleMap(outerSize)}>
         <div class="gauge-wrap">
           ${this.ticks?.map((t,i)=> html`
-            <div class="${classMap(flipClass(i, true))}" style="${styleMap(tickStyle(t,i))}" v="${Math.round(t.v*10)/10}"></div>`)}
+            <div class="${classMap(flipClass(i, true))}" style="${styleMap(tickStyle(t,i))}" v="${this.tickAt(i)}"></div>`)}
           ${this.minor?.map((t,i)=> html`
             <div class="${classMap(flipClass(i, false))}" style="${styleMap(tickStyle(t,i))}" v=""></div>`)}
 
@@ -223,7 +266,7 @@ export class LitGauge extends LitElement {
             <div class="${classMap(labelClass)}">
               <span style="${styleMap(labelStyle)}">
                 <strong style="${styleMap(fs)}">
-                  ${this.value}
+                  ${Number(this.value.toFixed(this.valuePrecision)).toLocaleString('en-US')}
                 </strong><br>${this.label}
 
               </span>

@@ -3,6 +3,25 @@ import {css} from 'lit';
 export const guageStyles = css`
   :host {
     --font-fam: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --outer-color:#444;
+    --hand-color: #ddd;
+    --outer-lighting-effect:conic-gradient(from 180deg at 50.0% 50.0%,
+      rgba(0,0,0,0) 98.00deg,
+      rgba(255,255,255,0.3) 103.00deg,
+      rgba(255,255,255,0.5) 180.00deg,
+      rgba(255,255,255,0.3) 257.00deg,
+      rgba(0,0,0,0) 265.00deg
+    );
+    --label-bg: #000;
+    --label-color:#fff;
+    --tick-color:#fff;
+    --tick-shadow:0 1px 1px black;
+    --dial-background:rgb(22,22,22);
+    --dial-gradient:none;
+    --dial-shadow: 0 0 1em .25em rgba(122,122,122,.8), inset 0 0 2em #bbb;
+    --dial-border-width: 1px;
+    --dial-border-color:#111;
+    --label-min-width:3em;
   }
   :host *{
     box-sizing: border-box;
@@ -15,25 +34,22 @@ export const guageStyles = css`
     display: inline-block;
     border-radius: 50%;
   }
+  :host .outer-gauge.no-lighting  .gauge-wrap{
+    background-image:none;
+  }
   :host .outer-gauge .gauge-wrap {
-     color:white;
-     transform: scale(-1, 1);
-     position: relative;
-     height: 100%;
-     width: 100%;
-     border-radius: 50%;
-     padding: 10%;
-      background-color: #000;
-    //box-shadow: inset 0 0 0 30px rgba(0 0 0 / .5);
-    background-image: conic-gradient(from 180deg at 50.0% 50.0%,
-    rgba(0,0,0,0) 80.00deg,
-    rgba(255,255,255,0.3) 108.00deg,
-    rgba(255,255,255,0.5) 180.00deg,
-    rgba(255,255,255,0.3) 252.00deg,
-    rgba(0,0,0,0) 280.00deg);
-   }
+    color:white;
+    transform: scale(-1, 1);
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    padding: 10%;
+    background-color: var(--outer-color);
+    background-image: var(--outer-lighting-effect);
+  }
   :host .hand {
-    background: #ccc;
+    background: var(--hand-color);
     height: 65%;
     left: 47.5%;
     position: absolute;
@@ -64,7 +80,8 @@ export const guageStyles = css`
     margin-left: -40px;
     vertical-align: text-bottom;
     display: inline-block;
-    text-shadow: 0 1px 1px black;
+    text-shadow: var(--tick-shadow);
+    color:var(--tick-color)
   }
   :host .tick.flip:before {
     transform: scale(1, -1);
@@ -87,9 +104,14 @@ export const guageStyles = css`
     border-radius: 50%;
     height: 100%;
     width: 100%;
-    background: black;
-    border:solid 1px #444;
-    box-shadow: 0 0  1em .25em rgba(122,122,122,.8), inset 0 0 2em #bbb;
+    border-style:solid;
+    border-width:var(--dial-border-width);
+    border-color:var(--dial-border-color);
+    box-shadow: var(--dial-shadow);
+    background-color: var(--dial-background);
+  }
+  :host .no-lighting div.dial{
+    box-shadow: none;
   }
   :host div.dial .lbl {
     transform: scale(-1, 1);
@@ -106,14 +128,13 @@ export const guageStyles = css`
   }
   :host div.dial .lbl.plain{
     bottom:0;
-
   }
-  :host .dial .lbl span {
+  :host .lbl span {
     border-radius: 36%;
     padding: 2px 10px;
-    min-width: 3em;
+    min-width: var(--label-min-width);
     display: inline-block;
-    background-color:rgba(0,0,0,1);
+    background-color:var(--label-bg);
     text-shadow: 0 1px 1px #fff;
   }
   :host div.dial:before {
@@ -155,6 +176,14 @@ export const guageStyles = css`
     opacity:.6;
 
   }
+  :host .no-lighting .color-band:before{
+    display: none;
+
+  }
+  :host .no-lighting .color-band:after{
+    background-image: none;
+    box-shadow: none;
+  }
   :host .color-band:after {
     content: '';
     position: absolute;
@@ -163,7 +192,7 @@ export const guageStyles = css`
     width: 88%;
     top: 6%;
     left: 6%;
-    background: #000;
-    //box-shadow:inset 0 -8px 33px #555, inset 0 -3px 5px #fff;
+    background: var(--dial-background);
+    background-image:var(--dial-gradient);
   }
 `

@@ -84,13 +84,12 @@ export class Thresholds {
       valid = false;
       errorCallback(type,msg);
     }
-    values = parseValuesAttrib(values, errHandler);
+    values = Array.isArray(values) ? values : parseValuesAttrib(values, errHandler);
     if (!valid){
       return null;
     }
     const dataItem = DataItem.create(values,min,max);
-    colors = colors.split(',').map(c => Color.parse(c.trim()));
-
+    colors = Array.isArray(colors) ? colors.map(c => Color.parse(c)) : colors.split(',').map(c => Color.parse(c.trim()));
     if (colors.length === values.length -1){
 
       let stops = colors.map((color,i) => ({

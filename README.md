@@ -1,5 +1,5 @@
 # \<lit-gauge>
-<img src="https://thewebkid.com/lit-gauges.png" width=600>
+<img src="https://thewebkid.com/lit-gauges.png" width=800>
 A snazzy gauge to visualize telemetry. If I can wind my way through the 100s of different customizations, edge cases, error handling, tests... I will package this up on npm!
 
 
@@ -35,8 +35,30 @@ npm i lit-gauge
 - **ticks**: _String_ - `(ticks="10")` Accepts either a numeric divisor (represents the total count of ranges created by the tick marks), or a csv value string representing custom value positions to place ticks (minor ticks will be disabled). Optionally you can enter ticks="thresholds" to place ticks on the scaleValues attrib values. The tick mark total will be one greater than the value you enter since the ranges are bounded on both sizes by marks.
 - **minorTicks**: _Number_ - `(minorTicks=5)` Available only when ticks is a numeric value. Subdivides each tick range by the specified value.
 - **value**: _Number_ - `(value=runtimeValue)` The runtime value that positions the needle and sets the runtime color value. 
-- **label**: _String_ - `(label=volts)` The runtime label to display below the value. If unspecified, the value moves upwards. Will make this much more configurable at some point
+- **label**: _String_ - `(label=volts)` The runtime label to display below the value. If unspecified, the value moves upwards. Will make this much more configurable at some point.
+- **plain**: _Boolean_ - Overrides the lighted glassy appearance. Uses a flat look. You can also do this with the css variables shown below.
+- **decimalPrecision** 
 
+## Styling
+To set custom colors and appearance
+```css
+lit-gauge{
+
+  --font-fam: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --outer-color:#444;
+  --hand-color: #ddd;
+  --dial-background:rgb(22,22,22);
+  --dial-gradient:none;
+  --outer-lighting-effect:conic-gradient(from 180deg at 50.0% 50.0%,
+  rgba(0,0,0,0) 98.00deg,
+  rgba(255,255,255,0.3) 103.00deg,
+  rgba(255,255,255,0.5) 180.00deg,
+  rgba(255,255,255,0.3) 257.00deg,
+  rgba(0,0,0,0) 265.00deg);
+  --label-bg: #000;
+  --dial-shadow: none;
+}
+```
 
 ## Run local
 ```bash
