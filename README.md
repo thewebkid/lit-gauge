@@ -37,26 +37,41 @@ npm i lit-gauge
 - **value**: _Number_ - `(value=runtimeValue)` The runtime value that positions the needle and sets the runtime color value. 
 - **label**: _String_ - `(label=volts)` The runtime label to display below the value. If unspecified, the value moves upwards. Will make this much more configurable at some point.
 - **plain**: _Boolean_ - Overrides the lighted glassy appearance. Uses a flat look. You can also do this with the css variables shown below.
-- **decimalPrecision** 
+- **decimalPrecision** _Int_ - For readability the label displays value.toFixed(decimalPrecision). If you have a suggestion for large numbers, please open an issue and share! 
 
 ## Styling
 To set custom colors and appearance
 ```css
 lit-gauge{
-
-  --font-fam: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --outer-color:#444;
-  --hand-color: #ddd;
-  --dial-background:rgb(22,22,22);
-  --dial-gradient:none;
+  --font-fam: Roboto, -apple-system, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+  --outer-color:#444;//this is the outermost background ring
+  //outer-lighting is the lighting effect on the outer band. Uses a conic semi-opaque gradient overlay.
   --outer-lighting-effect:conic-gradient(from 180deg at 50.0% 50.0%,
-  rgba(0,0,0,0) 98.00deg,
-  rgba(255,255,255,0.3) 103.00deg,
-  rgba(255,255,255,0.5) 180.00deg,
-  rgba(255,255,255,0.3) 257.00deg,
-  rgba(0,0,0,0) 265.00deg);
-  --label-bg: #000;
-  --dial-shadow: none;
+    rgba(0,0,0,0) 98.00deg,
+    rgba(255,255,255,0.3) 103.00deg,
+    rgba(255,255,255,0.5) 180.00deg,
+    rgba(255,255,255,0.3) 257.00deg,
+    rgba(0,0,0,0) 265.00deg
+  );
+  
+  // styles for the label at the bottom center
+  --label-bg: #000; // the label that shows the current value inside
+  --label-color:#fff; // font color of the label
+  --label-min-width:3em; // customize to your value so the container does not jiggle when updating the value
+  
+  // ticks/label styles
+  --tick-color:#fff; //the tick line color
+  --tick-label-color:#fff;// the outer numeric tick label colors
+  --tick-label-shadow:0 1px 1px black;//shadow to apply to the tick-labels to enhance visibility
+  
+  //dial styles
+  --dial-background:rgb(22,22,22);//the main inner color
+  --dial-gradient:none;//you can play with gradients to create your own lighting effect
+  --dial-shadow: 0 0 1em .25em rgba(122,122,122,.8), inset 0 0 2em #bbb;//used to enhance the space between the color thresholds.
+  --dial-border-width: 1px;//the dial border is where the outer ring meets the color threshold bands
+  --dial-border-color:#111;
+  --hand-color: #ddd;//the needle color
 }
 ```
 

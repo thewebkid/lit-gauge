@@ -2,7 +2,7 @@ import {css} from 'lit';
 
 export const guageStyles = css`
   :host {
-    --font-fam: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-fam:  Roboto, -apple-system, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --outer-color:#444;
     --hand-color: #ddd;
     --outer-lighting-effect:conic-gradient(from 180deg at 50.0% 50.0%,
@@ -15,7 +15,8 @@ export const guageStyles = css`
     --label-bg: #000;
     --label-color:#fff;
     --tick-color:#fff;
-    --tick-shadow:0 1px 1px black;
+    --tick-label-color:#fff;
+    --tick-label-shadow: 0 1px 1px black;
     --dial-background:rgb(22,22,22);
     --dial-gradient:none;
     --dial-shadow: 0 0 1em .25em rgba(122,122,122,.8), inset 0 0 2em #bbb;
@@ -26,6 +27,7 @@ export const guageStyles = css`
   :host *{
     box-sizing: border-box;
     font-family: var(--font-fam);
+    font-weight: 400;
   }
   :host .outer-gauge {
     background: transparent;
@@ -80,8 +82,8 @@ export const guageStyles = css`
     margin-left: -40px;
     vertical-align: text-bottom;
     display: inline-block;
-    text-shadow: var(--tick-shadow);
-    color:var(--tick-color)
+    text-shadow:var(--tick-label-shadow);
+    color:var(--tick-label-color);
   }
   :host .tick.flip:before {
     transform: scale(1, -1);
@@ -89,7 +91,7 @@ export const guageStyles = css`
   :host .tick:after {
     content: '';
     position: absolute;
-    background: #fff;
+    background-color: var(--tick-color);
     width: 1px;
     height: 5%;
     bottom: 80%;
@@ -124,7 +126,7 @@ export const guageStyles = css`
     text-align: center;
     white-space: nowrap;
     z-index: 3;
-    color:white;
+    color:var(--label-color);
   }
   :host div.dial .lbl.plain{
     bottom:0;

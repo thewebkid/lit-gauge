@@ -19,7 +19,6 @@ export class LitGauge extends LitElement {
     tickLabels:{type:String},// optional
     thresholds:{type: Object},
     minorTicks: {type: Number},
-    minor: {type: Object},
     plain: {type: Boolean},
     valuePrecision: {type:Number},
     options: {type:Object}
@@ -244,9 +243,10 @@ export class LitGauge extends LitElement {
       return g;
     }
     const labelStyle = {
-      boxShadow:`inset 0 -4px 8px ${color},
-      inset 0 1px 1px #ddd`,
+      boxShadow: this.plain ? 'none' : `inset 0 -4px 8px ${color}`,
+      outline: this.plain ? `2px solid ${color}` : 'none',
       paddingBottom: px(3),
+      borderRadius: this.plain ? '.41em' : '.5em',
       ...fs
     }
 
