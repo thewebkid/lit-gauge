@@ -2,7 +2,7 @@
 <img src="https://thewebkid.com/lit-gauges.png?v=1" width=800>
 A snazzy gauge to visualize telemetry. If I can wind my way through the 100s of different customizations, edge cases, error handling, tests... I will package this up on npm!
 
-
+The following assumes I have created a lit-gauge NPM package (not yet)
 
 ## Installation
 
@@ -10,22 +10,58 @@ A snazzy gauge to visualize telemetry. If I can wind my way through the 100s of 
 npm i lit-gauge
 ```
 
-## Usage
+## Usage Examples
+Declaratively set attributes inline like this:
 
 ```html
-<script type='module' src="index.js"></script>
+
+<script type='module'>
+  import {LitGauge} from 'lit-gauge';
+</script>
 <lit-gauge
-  size="200"
-  scaleValues="0,5,20,65,80,90,100" scaleColors="#555,#999,green,yellow,orange,red"
-  fluid-colors="false" ticks="5" minorTicks="5" value="40"
+  id=small size="200"
+  scaleValues="0,5,20,65,80,90,100" scaleColors="#0909FB,#1EB3B3,#375a7f,#444,#777,#999"
+  fluidcolors="true" ticks="5" minorTicks="5" value="40" valuePrecision="1"
 >
 </lit-gauge>
 <lit-gauge
-  size="300"
-  scaleValues="50,60,70,115,140,150" scaleColors="blue,aqua,green,yellow,red"
-  fluidcolors="true" ticks="10" minorTicks="5" value="60" label="RPS"
+  id=large size="300"
+  scaleColors="blue,aqua,green,yellow,red"
+  fluidcolors="true" ticks="10" minorTicks="5" value="60" label="AMPS"
+  valuePrecision="1"
 >
 </lit-gauge>
+
+<lit-gauge
+  id=med size="250"
+  scaleValues="25000,40000,55000,65000,70000,75000"
+  scaleColors="#999,#ccc,#D85F03,#a00,#ff7b7b"
+  ticks="thresholds" value="60" label="RPM"
+  tickLabels="25k,35k,45k,55k,65k,75k"
+  valuePrecision="0"
+>
+</lit-gauge>
+<br>
+<lit-gauge
+  id=white size="200"
+  scaleValues="0,5,20,65,80,90,100" scaleColors="#0909FB,#1EB3B3,#375a7f,#444,#777,#999"
+  plain="true" ticks="5" minorTicks="5" value="40" valuePrecision="1"
+>  
+```
+## Usage with single options object
+```html
+<script type='module'>
+  import {LitGauge} from 'lit-gauge';
+
+  let g = document.querySelector('lit-gauge');
+  g.options = {
+    scaleValues: [50, 60, 70, 115, 130, 150],
+    scaleColors: ['midnightblue','blue','green','yellow','rgba(255,0,0,1)'],
+    ticks: 10, minorTicks: 5,
+    fluidColors: false, plain: true, 
+    valuePrecision: 1
+  }
+</script>
 ```
 ## Attributes
 - **size**: _Number_ - Sets the height and width of the component. This component is square. It starts to look bad below 150px.
@@ -39,9 +75,12 @@ npm i lit-gauge
 - **plain**: _Boolean_ - Overrides the lighted glassy appearance. Uses a flat look. You can also do this with the css variables shown below.
 - **decimalPrecision** _Int_ - For readability the label displays value.toFixed(decimalPrecision). If you have a suggestion for large numbers, please open an issue and share! 
 
+
+
 ## Styling
 To set custom colors and appearance
-```css
+```html
+<style>
 lit-gauge{
   --font-fam: Roboto, -apple-system, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   
@@ -71,8 +110,9 @@ lit-gauge{
   --dial-shadow: 0 0 1em .25em rgba(122,122,122,.8), inset 0 0 2em #bbb;//used to enhance the space between the color thresholds.
   --dial-border-width: 1px;//the dial border is where the outer ring meets the color threshold bands
   --dial-border-color:#111;
-  --hand-color: #ddd;//the needle color
+  --hand-color: #ddd; //the needle color
 }
+</style>
 ```
 
 ## Run local
@@ -80,10 +120,4 @@ lit-gauge{
 npm dev
 ```
 
-### Todos
-Ability to set values as props or a single config data object. Parsing declared string attribs is fine, but feels hacky.
-
-Need to add deep rich themeability, value precision (there will be limitations to what can be displayed - but defer to a percentage should solve this case). 
-
-Testing
-
+I am open to work if you need a dev like me. Snatch me up. My linkedIn is on thewebkid.com :)
