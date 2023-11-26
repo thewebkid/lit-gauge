@@ -1,4 +1,4 @@
-# \<lit-gauge>
+# \<lit-gauge> [![npm version](https://badge.fury.io/js/lit-gauge.svg)](https://badge.fury.io/js/lit-gauge) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <img src="https://thewebkid.com/lit-gauges.png?v=2" width=600>
 A snazzy gauge to visualize telemetry. This is a work in progress. Please open a ticket as I am actively developing this. Much of this seems to work great. 
 
@@ -52,6 +52,7 @@ Declaratively set attributes inline like this:
 ```
 ## Usage with single options object
 ```html
+<lit-gauge></lit-gauge>
 <script type='module'>
   import {LitGauge} from 'lit-gauge';
 
@@ -78,15 +79,14 @@ Declaratively set attributes inline like this:
 - **decimalPrecision** _Int_ - For readability the label displays value.toFixed(decimalPrecision). If you have a suggestion for large numbers, please open an issue and share! 
 
 
-
 ## Styling
-To set custom colors and appearance
+CSS vars to set custom colors and appearance. Below are the default values.
 ```html
 <style>
 lit-gauge{
   --font-fam: Roboto, -apple-system, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif;
   --outer-color:#444;//this is the outermost background ring
-  //outer-lighting is the lighting effect on the outer band. Uses a conic semi-opaque gradient overlay.
+  /*outer-lighting is the lighting effect on the outer band. Uses a conic semi-opaque gradient overlay.*/
   --outer-lighting-effect:conic-gradient(from 180deg at 50.0% 50.0%,
     rgba(0,0,0,0) 98.00deg,
     rgba(255,255,255,0.3) 103.00deg,
@@ -95,23 +95,23 @@ lit-gauge{
     rgba(0,0,0,0) 265.00deg
   );
   
-  // styles for the label at the bottom center
-  --label-bg: #000; // the label that shows the current value inside
-  --label-color:#fff; // font color of the label
-  --label-min-width:3em; // customize to your value so the container does not jiggle when updating the value
+  /* styles for the label at the bottom center*/
+  --label-bg: #000; /*  the label that shows the current value inside*/
+  --label-color:#fff; /*  font color of the label*/
+  --label-min-width:3em; /*  customize to your value so the container does not jiggle when updating the value*/
   
-  // ticks/label styles
-  --tick-color:#fff; //the tick line color
-  --tick-label-color:#fff;// the outer numeric tick label colors
-  --tick-label-shadow:0 1px 1px black;//shadow to apply to the tick-labels to enhance visibility
+  /*  ticks/label styles*/
+  --tick-color:#fff; /* the tick line color*/
+  --tick-label-color:#fff;/*  the outer numeric tick label colors*/
+  --tick-label-shadow:0 1px 1px black;/* shadow to apply to the tick-labels to enhance visibility*/
   
-  //dial styles
-  --dial-background:rgb(22,22,22);//the main inner color
-  --dial-gradient:none;//you can play with gradients to create your own lighting effect
-  --dial-shadow: 0 0 1em .25em rgba(122,122,122,.8), inset 0 0 2em #bbb;//used to enhance the space between the color thresholds.
-  --dial-border-width: 1px;//the dial border is where the outer ring meets the color threshold bands
+  /* dial styles*/
+  --dial-background:rgb(22,22,22);/* the main inner color*/
+  --dial-gradient:none;/* you can play with gradients to create your own lighting effect*/
+  --dial-shadow: 0 0 1em .25em rgba(122,122,122,.8), inset 0 0 2em #bbb;/* used to enhance the space between the color thresholds.*/
+  --dial-border-width: 1px;/* the dial border is where the outer ring meets the color threshold bands*/
   --dial-border-color:#111;
-  --hand-color: #ddd; //the needle color
+  --hand-color: #ddd; /* the needle color*/
 }
 </style>
 ```
