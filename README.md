@@ -121,47 +121,51 @@ These are the styles used to create the example screenshot in sequence
 <style>
     
     #lg1{
-      --outer-color:#000;
-      --hand-color:white;
-      --dial-background:black;
+      --outer-color: #000;
+      --hand-color: white;
+      --dial-background: black;
     }
     #lg2{
       --hand-color: #ccc;
-      --dial-background:black;
-      --dial-gradient:radial-gradient(200px at 50.0% 10.0%,
-      rgba(55,55,55,1) 15%,
-      rgba(0,0,0,1) 70%,
-      rgba(0,0,0,0) 100%
+      --dial-background: black;
+      --dial-gradient: radial-gradient(200px at 50.0% 10.0%,
+        rgba(55,55,55,1) 15%,
+        rgba(0,0,0,1) 70%,
+        rgba(0,0,0,0) 100%
       );
       --dial-shadow:none;
     }
     #lg3{
-      --outer-color:#400;
-      --dial-background:black;
-      --dial-gradient:radial-gradient(200px at 50.0% 10.0%,
+      --outer-color: #400;
+      --dial-background: black;
+      --dial-gradient: radial-gradient(200px at 50.0% 10.0%,
         rgba(55,55,55,1) 15%,
         rgba(0,0,0,1) 70%,
         rgba(0,0,0,0) 100%
       );
       --dial-border-width: 2px;
-      //--dial-border-color:red;
       --dial-shadow:inset 0 -10px 30px #444;
     }
     #lg4{
-      --outer-color:transparent;
-      --label-color:black;
-      --dial-background:#fff;
-      --dial-shadow:none;
-      --tick-color:black;
-      --tick-label-color:white;
+      --outer-color: transparent;
+      --label-color: black;
+      --dial-background: #fff;
+      --dial-shadow :none;
+      --tick-color: black;
+      --tick-label-color: white;
       --hand-color: #333;
-      --tick-label-shadow:0 1px 1px black;
-      --label-bg:#ccc;
+      --tick-label-shadow: 0 1px 1px black;
+      --label-bg: #ccc;
     }
   </style>
 ```
+
 ## Run local
+Uses vite. Will run on node 16+ - but will complain about compatibility if you are stuck on node 16 like me. Ignore this.
 ```bash
+git clone https://github.com/thewebkid/lit-gauge.git
+cd ./lit-gauge
+npm i
 npm dev
 ```
 
