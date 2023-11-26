@@ -2,8 +2,8 @@
   "name": "lit-gauge",
   "description": "An experimental gauge Web component (lit-gauge) ",
   "license": "MIT",
-  "author": "lit-gauge",
-  "version": "0.1.0",
+  "author": "Ron Gilchrist (thewebkid)",
+  "version": "0.1.1",
   "type": "module",
   "main": "index.js",
   "module": "index.js",
@@ -11,6 +11,11 @@
     ".": "./index.js",
     "./lit-gauge.js": "./lit-gauge.js"
   },
+  "keywords": [
+    "web-component",
+    "lit",
+    "color-picker"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/thewebkid/lit-gauge.git"

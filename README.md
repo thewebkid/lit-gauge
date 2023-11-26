@@ -1,8 +1,10 @@
 # \<lit-gauge>
 <img src="https://thewebkid.com/lit-gauges.png?v=2" width=600>
-A snazzy gauge to visualize telemetry. If I can wind my way through the 100s of different customizations, edge cases, error handling, tests... I will package this up on npm!
+A snazzy gauge to visualize telemetry. This is a work in progress. Please open a ticket as I am actively developing this. Much of this seems to work great. 
 
-The following assumes I have created a lit-gauge NPM package (not yet)
+
+Those edge cases though...
+
 
 ## Installation
 
@@ -119,4 +121,4 @@ lit-gauge{
 npm dev
 ```
 
-I am open to work if you need a dev like me. Snatch me up. My linkedIn is on thewebkid.com :)
+I am open to work if you need a dev like me. Snatch me up. My portfolio and the link to my LinkedIn is on thewebkid.com :)

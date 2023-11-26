@@ -189,12 +189,6 @@ export class Thresholds {
     return this.inputs.map(s => s.color);
   }
 
-
-  get colorStops(){
-
-    return (adjRatio = 1, off = 0) =>
-      this.stops.map(s => `${s.color} ${((off + (s.pos * adjRatio)) * 100).toFixed(1)}%`);
-  }
   get stops(){
     //this.log('stops', this.id);
     let {inputs, fluid} = this;
@@ -254,9 +248,7 @@ export class Thresholds {
     //console.log('stopCss',this.id)
     return this.stops.map(({color, pos}) => `${color} ${(pos * 100).toFixed(1)}%`).join(', ');
   }
-  get verticalGradient(){
-    return `linear-gradient(0, ${this.stopCss})`;
-  }
+
 }
 
 const sortByKey = (arr, k) => arr.sort((a, b) => {
