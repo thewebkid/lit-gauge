@@ -1,5 +1,5 @@
 # \<lit-gauge>
-<img src="https://thewebkid.com/lit-gauges.png?v=1" width=800>
+<img src="https://thewebkid.com/lit-gauges.png?v=2" width=600>
 A snazzy gauge to visualize telemetry. If I can wind my way through the 100s of different customizations, edge cases, error handling, tests... I will package this up on npm!
 
 The following assumes I have created a lit-gauge NPM package (not yet)
@@ -82,8 +82,7 @@ To set custom colors and appearance
 ```html
 <style>
 lit-gauge{
-  --font-fam: Roboto, -apple-system, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  
+  --font-fam: Roboto, -apple-system, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif;
   --outer-color:#444;//this is the outermost background ring
   //outer-lighting is the lighting effect on the outer band. Uses a conic semi-opaque gradient overlay.
   --outer-lighting-effect:conic-gradient(from 180deg at 50.0% 50.0%,
