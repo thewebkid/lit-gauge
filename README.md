@@ -49,7 +49,7 @@ Here are examples using declarative inline attributes. These correspond to the g
 ```
 ## Usage with single options object
 ```html
-<lit-gauge></lit-gauge>
+<lit-gauge />
 <script type='module'>
   import {LitGauge} from 'lit-gauge';
 
@@ -66,18 +66,19 @@ Here are examples using declarative inline attributes. These correspond to the g
 ## Attributes
 - **size**: _Number_ - Sets the height and width of the component. This component is square. It starts to look bad below 150px.
 - **scaleValues**: _String_ - `(scaleValues="0,10,50,90,100")` Sets the value ranges that will correspond with the color thresholds.
-- **scaleColors**: _String_ - `(scaleColors="#333,#888,#ccc")` Sets the colors that fill each value range. Must be exactly one value less than the scaleValues attrib. If you set a `scaleValue=0,10,20,30` then you have created 3 ranges (thresholds) that require a color. scaleColors=#333,#888,#ccc would set 0-10 to #333, 10-20 to #888, and 20-30 to #ccc. Use any valid css color string for each value.  
+- **scaleColors**: _String_ - `(scaleColors="#333,green,yellow,red")` Sets the colors that fill each value range. Must be exactly one value less than the scaleValues attrib. If you set a `scaleValue=0,10,20,30` then you have created 3 ranges (thresholds) that require a color. scaleColors=#333,#888,#ccc would set 0-10 to #333, 10-20 to #888, and 20-30 to #ccc. Use any valid css color string for each value.  
 - **fluidColors**: _Boolean_ - Shows a fluid gradient instead of hard stops for the color ranges.
 - **ticks**: _String_ - `(ticks="10")` Accepts either a numeric divisor (represents the total count of ranges created by the tick marks), or a csv value string representing custom value positions to place ticks (minor ticks will be disabled). Optionally you can enter `ticks="thresholds"` to place ticks on the scaleValues attrib values. The tick mark total will be one greater than the value you enter since the ranges are bounded on both sizes by marks.
-- **minorTicks**: _Number_ - `(minorTicks=5)` Available only when ticks is a numeric value. Subdivides each tick range by the specified value.
+- **minorTicks**: _Number_ - `(minorTicks="5")` Available only when ticks is a numeric value. Subdivides each tick range by the specified value.
+- **tickLabels**: _String_ - `(tickLabels="0%,20%,50%,100%")`Override the generated numeric tick values with a CSV string.
 - **value**: _Number_ - `(value=runtimeValue)` The runtime value that positions the needle and sets the runtime color value. 
-- **label**: _String_ - `(label=volts)` The runtime label to display below the value. If unspecified, the value moves upwards. Will make this much more configurable at some point.
+- **label**: _String_ - `(label="Volts")` The runtime label to display below the value. If unspecified, the value moves upwards. This should be a short, succinct label.
 - **plain**: _Boolean_ - Overrides the lighted glassy appearance. Uses a flat look. You can also do this with the css variables shown below.
-- **decimalPrecision** _Int_ - For readability the label displays value.toFixed(decimalPrecision). If you have a suggestion for large numbers, please open an issue and share! 
+- **valuePrecision** _Int_ - For readability the label displays value.toFixed(decimalPrecision). If you have a suggestion for large numbers, please open an issue and share! 
 
 
 ## Styling
-CSS vars to set custom colors and appearance. Below are the default values.
+CSS vars to set custom colors and appearance. Below are the default values. Use the [online editor](https://thewebkid.com/modules/lit-gauge/) to generate your own theme.
 ```html
 <style>
 lit-gauge{
@@ -154,7 +155,7 @@ These are the styles used to create the example screenshot in sequence
 ```
 
 ## Run local
-Uses vite. Will run on node 16+ - but will complain about compatibility if you are stuck on node 16 like me. Ignore this.
+Uses vite. Will run on node 16+ - but will complain about compatibility if you are stuck on node 16 like me. Ignore this. It's fine.
 ```bash
 git clone https://github.com/thewebkid/lit-gauge.git
 cd ./lit-gauge
