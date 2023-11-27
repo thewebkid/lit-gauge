@@ -3,14 +3,14 @@ import {isType} from './my-type.js';
 
 
 class DataItem{
-  constructor(min=null, max=null) {
+  constructor(min = null, max = null) {
     this.min = min;
     this.max = max;
   }
-  static create(scaleValues, min=null, max=null, initialVal){
+  static create(scaleValues, min = null, max = null, initialVal){
     min = min ?? Math.min(...scaleValues);
     max = max ?? Math.max(...scaleValues);
-    let inst = new DataItem(min,max);
+    let inst = new DataItem(min, max);
     inst.val = initialVal;
     return inst;
   }
@@ -21,7 +21,7 @@ class DataItem{
     return pct => this.min + (this.spread * pct);
   }
   get pctAtVal(){
-    return val => (val-this.min)/this.spread;
+    return val => (val - this.min) / this.spread;
   }
   get pct(){
     return (this._val - this.min) / this.spread;
@@ -41,33 +41,32 @@ const parseValuesAttrib = (attr, errorCallback) => {
     errorCallback('scale', 'invalid scaleValues attribute string');
     return null;
   }
-  const values = attr.split(',').map((v,i) => {
+  return attr.split(',').map((v, i) => {
     v = v.trim();
-    if (!i){
+    if (!i) {
       isPercent = v.endsWith('%');
     }
 
-    if (v.endsWith('%')){
-      if (i && !isPercent){
-        errorCallback('scale', 'Error: mixture of percent and number values found in scaleValues')
+    if (v.endsWith('%')) {
+      if (i && !isPercent) {
+        errorCallback('scale', 'Error: mixture of percent and number values found in scaleValues');
       }
-      v = Number(v.replace('%','')) / 100;
-      if (v < 0 || v > 100){
-        errorCallback('scale', `Percentage scale values must begin with 0% and end with 100%`)
+      v = Number(v.replace('%', '')) / 100;
+      if (v < 0 || v > 100) {
+        errorCallback('scale', `Percentage scale values must begin with 0% and end with 100%`);
       }
-    }else{
-      if (i && isPercent){
-        errorCallback('scale', 'Error: mixture of percent and number values found in scaleValues')
+    } else {
+      if (i && isPercent) {
+        errorCallback('scale', 'Error: mixture of percent and number values found in scaleValues');
       }
       v = Number(v);
     }
-    if (isNaN(v)){
-      errorCallback('scale', 'Error parsing scale values. Enter comma-separated scale from low to high. Append with % for a percent scale')
+    if (isNaN(v)) {
+      errorCallback('scale', 'Error parsing scale values. Enter comma-separated scale from low to high. Append with % for a percent scale');
     }
     return v;
   });
-  return values;
-}
+};
 export class Thresholds {
   constructor(stops, {fluid, reversed, dataItem} = {}){
     this.fluid = fluid;
@@ -80,25 +79,25 @@ export class Thresholds {
     let {values, colors, min, max, fluid} = args;
     let valid = true;
     //let isPercent = false;
-    let errHandler = (type,msg)=>{
+    let errHandler = (type, msg) => {
       valid = false;
-      errorCallback(type,msg);
-    }
+      errorCallback(type, msg);
+    };
     values = Array.isArray(values) ? values : parseValuesAttrib(values, errHandler);
     if (!valid){
       return null;
     }
-    const dataItem = DataItem.create(values,min,max);
+    const dataItem = DataItem.create(values, min, max);
     colors = Array.isArray(colors) ? colors.map(c => Color.parse(c)) : colors.split(',').map(c => Color.parse(c.trim()));
-    if (colors.length === values.length -1){
+    if (colors.length === values.length - 1){
 
-      let stops = colors.map((color,i) => ({
+      let stops = colors.map((color, i) => ({
         color,
         pos: dataItem.pctAtVal(values[i])
       }));
-      return new Thresholds(stops, {fluid,dataItem});
+      return new Thresholds(stops, {fluid, dataItem});
     }else{
-      errHandler('scale', 'colors.length should be scaleValues.length - 1.')
+      errHandler('scale', 'colors.length should be scaleValues.length - 1.');
     }
   }
 
@@ -124,7 +123,17 @@ export class Thresholds {
     }
   }
 
-
+  addThreshold(pos, color){
+    if (!color){
+      color = this.getColor(pos);
+    }
+    this.initInputs([...this.inputs, {pos, color, lbl: ''}]);
+  }
+  removeThreshold(pos){
+    let stops = [...this.inputs];
+    stops.splice(stops.findIndex(s => s.pos === pos), 1);
+    this.initInputs(stops);
+  }
   get spread(){
     //let {min, max} = this.parent;
     return this.dataItem.spread;
@@ -178,6 +187,27 @@ export class Thresholds {
       return this.dataItem.valAtPct(pos);
     };
   }
+  get ranges(){
+    //this.log('ranges', this.id);
+    let posits = [...this.positions];
+    let inputs = [...this.inputs];
+    let ranges = posits.map((p, i) => {
+      let p1 = p;
+      let p2 = posits[i + 1] ?? 1;
+      let color = inputs[i].color;
+      return {
+        posFrom: 1 - p2,
+        posTo: 1 - p1, color,
+        lbl: inputs[i].lbl,
+        from: p2,
+        to: p1,
+        limit: posits[i - 1] ?? 0,
+        size: p2 - p1
+      };
+    });
+
+    return ranges;
+  }
   get ticks(){
     return [...this.positions.map(p => this.valFromPos(p)), this.dataItem.max];
   }
@@ -192,10 +222,10 @@ export class Thresholds {
   get stops(){
     //this.log('stops', this.id);
     let {inputs, fluid} = this;
-    inputs = [...inputs, {pos: 1, color: inputs[inputs.length-1].color}];
+    inputs = [...inputs, {pos: 1, color: inputs[inputs.length - 1].color}];
 
     if (fluid){
-      let last = inputs.length-1;
+      let last = inputs.length - 1;
       const midPoint = i => {
         let p1 = inputs[i].pos;
         if (p1 === 1){
@@ -220,14 +250,14 @@ export class Thresholds {
     });
   }
   get scaledStops(){
-    return (min, max,adjRatio = 1, off = 0) => {
+    return (min, max, adjRatio = 1, off = 0) => {
       let difMin = this.dataItem.min - min;
       let difMax = max - this.dataItem.max;
       let newSpread = this.spread + difMax + difMin;
       let vals = this.stops.map(s => this.valFromPos(s.pos));
       vals[0] = min;
       if (this.fluid){
-        vals.push(this.dataItem.max)
+        vals.push(this.dataItem.max);
       }
       let zeroed = vals.map(v => v - min);
 
@@ -241,7 +271,7 @@ export class Thresholds {
         return `${s.color} ${(positions[i] * 100).toFixed(1)}%`;
       });
 
-      return s
+      return s;
     };
   }
   get stopCss(){

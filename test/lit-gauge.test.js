@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import '../lit-gauge.js';
+import '../index.js';
 
 describe('LitGauge', () => {
   it('has a default header "Hey there" and counter 5', async () => {

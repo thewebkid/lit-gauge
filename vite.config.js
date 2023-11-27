@@ -6,7 +6,7 @@ export default defineConfig({
     copyPublicDir: false,
     lib: {
       entry: resolve(__dirname, ''),
-      name: 'color-picker',
+      name: 'lit-gauge',
       fileName: 'index'
     }
   }

@@ -3,7 +3,7 @@
   "description": "An experimental gauge Web component (lit-gauge) ",
   "license": "MIT",
   "author": "Ron Gilchrist (thewebkid)",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "type": "module",
   "main": "index.js",
   "module": "index.js",
@@ -11,6 +11,7 @@
     ".": "./index.js",
     "./lit-gauge.js": "./lit-gauge.js"
   },
+  "homepage": "https://thewebkid.com/modules/lit-gauge",
   "keywords": [
     "web-component",
     "lit",
@@ -32,7 +33,8 @@
   },
   "dependencies": {
     "lit": "^3.1.0",
-    "modern-color": "^1.1.3"
+    "modern-color": "^1.1.3",
+    "lit-colorpicker": "^0.2.12"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.4.17",

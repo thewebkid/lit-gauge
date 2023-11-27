@@ -1,10 +1,8 @@
 # \<lit-gauge> [![npm version](https://badge.fury.io/js/lit-gauge.svg)](https://badge.fury.io/js/lit-gauge) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-<img src="https://thewebkid.com/lit-gauges.png?v=2" width=600>
+<img alt="Four Lit Gauge Implementation Examples" src="https://thewebkid.com/lit-gauges.png?v=2" width=600>
 A snazzy gauge to visualize telemetry. This is a work in progress. Please open a ticket as I am actively developing this. Much of this seems to work great. 
 
-
-Those edge cases though...
-
+[Live Demo](https://thewebkid.com/modules/lit-gauge/)
 
 ## Installation
 
@@ -128,11 +126,6 @@ These are the styles used to create the example screenshot in sequence
     #lg2{
       --hand-color: #ccc;
       --dial-background: black;
-      --dial-gradient: radial-gradient(200px at 50.0% 10.0%,
-        rgba(55,55,55,1) 15%,
-        rgba(0,0,0,1) 70%,
-        rgba(0,0,0,0) 100%
-      );
       --dial-shadow:none;
     }
     #lg3{
