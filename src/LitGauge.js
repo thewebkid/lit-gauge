@@ -3,7 +3,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import {guageStyles} from './css.js';
 import {Thresholds} from './thresholds';
-import {ColorPicker} from 'lit-colorpicker';
 import {isType} from './my-type.js';
 
 export const px = n => `${n}px`;
