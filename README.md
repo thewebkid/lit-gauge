@@ -1,10 +1,10 @@
 # \<lit-gauge> [![npm version](https://badge.fury.io/js/lit-gauge.svg)](https://badge.fury.io/js/lit-gauge) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <img alt="Four Lit Gauge Implementation Examples" src="https://thewebkid.com/lit-gauges.png?v=2" width=600>
-A snazzy [Lit 3](https://lit.dev/) web component gauge to visualize telemetry. Roll your own gauge at the link below:
+A snazzy gauge web component to visualize telemetry. Roll/style your own gauge at the link below:
 
 [Live demo and configuration / style editor](https://thewebkid.com/modules/lit-gauge/)
 
-This will work inside any framework. [React integration docs](https://lit.dev/docs/frameworks/react/). Framework-agnostic web components are the future! 
+Since this is a [Lit 3 web component](https://lit.dev/), this will work inside any SPA framework. [React integration docs](https://lit.dev/docs/frameworks/react/). Framework-agnostic web components are the future! 
 
 ## Installation
 
