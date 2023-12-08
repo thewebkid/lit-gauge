@@ -58,7 +58,7 @@ export const guageStyles = css`
     top: 5%;
     transform-origin: 50% 69%;
     width: 5%;
-    z-index: 3;
+    z-index: 12;
     clip-path: polygon(50% 0, 100% 95%, 50% 100%, 0 95%, 50% 0);
     box-shadow: 2px 10px 2px #333;
   }
@@ -87,6 +87,7 @@ export const guageStyles = css`
   }
   :host .tick.flip:before {
     transform: scale(1, -1);
+    bottom:92.5%;
   }
   :host .tick:after {
     content: '';
@@ -111,6 +112,14 @@ export const guageStyles = css`
     border-color:var(--dial-border-color);
     box-shadow: var(--dial-shadow);
     background-color: var(--dial-background);
+    --center-gradient:radial-gradient(ellipse at center,
+      rgba(0, 0, 0, .7) 0%,
+      rgba(0, 0, 0, 1) 18%,
+      rgba(0, 0, 0, 0) 22%,
+      rgba(0, 0, 0, 0.65) 100%
+    );
+    --center-color:white;
+    --center-shadow:var(--hand-color);
   }
   :host .no-lighting div.dial{
     box-shadow: none;
@@ -141,17 +150,19 @@ export const guageStyles = css`
   }
   :host div.dial:before {
     content: '';
-    background: #fff radial-gradient(ellipse at center, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, 1) 18%, rgba(0, 0, 0, 0) 22%, rgba(0, 0, 0, 0.65) 100%);
+    background-color: var(--center-color);
+    background-image: var(--center-gradient);
     border-radius: 50%;
-    border: solid 2px #fff;
+    box-shadow:0 0 0 1px var(--center-shadow);
+    //border-color: var(--center-color);
     height: 8%;
     width: 8%;
     position: absolute;
     display: inline-block;
-    top: 49%;
-    left: 49%;
+    top: 50%;
+    left: 50%;
     margin:-4%;
-    z-index: 4;
+    z-index: 14;
    }
   :host .color-band {
     position: absolute;

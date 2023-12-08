@@ -4,6 +4,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import {guageStyles} from './css.js';
 import {Thresholds} from './thresholds';
 import {isType} from './my-type.js';
+import {Color} from 'modern-color';
 
 export const px = n => `${n}px`;
 export class LitGauge extends LitElement {
@@ -48,16 +49,15 @@ export class LitGauge extends LitElement {
     this.hasErrors = true;
   }
 
-  initThresholds(debug){
+  initThresholds(){
+
     let {scaleValues, scaleColors, min, max, fluidColors} = this;
     const thresholdArgs = {
       values: scaleValues,
       colors: scaleColors,
       min, max, fluid: fluidColors
     };
-    if (debug){
-      debugger;
-    }
+
     const errCallback = (type, message) => this.errorHandler(type, message);
     this.thresholds = Thresholds.fromScaleAttributes(thresholdArgs, errCallback);
     if (!this.errors.length){
@@ -74,6 +74,28 @@ export class LitGauge extends LitElement {
       const reinit = ['scaleColors', 'scaleValues', 'minorTicks'].some(key => props.has(key));
       if (reinit) {
         this.initThresholds();
+      }
+      const handColor = Color.parse(getComputedStyle(this.shadowRoot.host).getPropertyValue('--hand-color'));
+      let dial = this.shadowRoot.querySelector('div.dial');
+      if (dial && !this.dialButtonInit) {
+        //center dial button should be like the hand color
+        if (handColor.hsl.l < 40){
+          dial.style.setProperty('--center-color', handColor.darken(.2));
+          let {r,g,b} = handColor.lighten(.35);
+          let cg = `radial-gradient(ellipse at center,
+      rgba(${r}, ${g}, ${b}, 1) 0%,
+      rgba(${r}, ${g}, ${b}, .8) 22%,
+      rgba(0,0,0, .5) 22%,
+      rgba(${r}, ${g}, ${b}, .4) 27%,
+      rgba(0,0,0, .2) 100%
+    )${this.plain ? '':',conic-gradient(from 180deg at 50.0% 50.0%,rgba(0,0,0,0) 98.00deg,rgba(255,255,255,0.3) 103.00deg, rgba(255,255,255,0.5) 180.00deg,      rgba(255,255,255,0.3) 257.00deg,      rgba(0,0,0,0) 265.00deg    )'}`;
+          dial.style.setProperty('--center-gradient', cg);
+
+        }else{
+          dial.style.setProperty('--center-color', handColor.lighten(.2));
+        }
+        dial.style.setProperty('--center-shadow', handColor.lighten(.2));
+        this.dialButtonInit = true;
       }
     }
     if (props.has('options')){
