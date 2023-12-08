@@ -102,10 +102,7 @@ export class Thresholds {
   }
 
   initInputs(stops){
-
-
     let inputs = Array.isArray(stops[0]) ? [...stops].map(s => {
-
       return {pos: Number(s[0]), color: Color.parse(s[1]), lbl: s[2]};
     }) : [...stops];
     try {

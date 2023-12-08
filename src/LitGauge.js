@@ -71,7 +71,7 @@ export class LitGauge extends LitElement {
         this.thresholds.fluid = this.fluidColors;
         //console.log(this.thresholds);
       }
-      const reinit = ['scaleColors','scaleValues', 'minorTicks'].some(key=>props.has(key));
+      const reinit = ['scaleColors', 'scaleValues', 'minorTicks'].some(key => props.has(key));
       if (reinit) {
         this.initThresholds();
       }
@@ -109,9 +109,11 @@ export class LitGauge extends LitElement {
       let count = Number(v);
       let incr = this.spread / count;
       for (let val = this.min; val < this.max; val += incr){
-        ticks.push(val);
+        let v = Number(val.toFixed(this.valuePrecision));
+        ticks.push(v);
       }
       ticks.push(this.max);
+      ticks = Array.from(new Set(ticks));
     }
     else {
       ticks = v.split(',').map(t => Number(t)).filter(t => isFinite(t));

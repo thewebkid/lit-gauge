@@ -3,7 +3,7 @@
   "description": "An experimental gauge Web component (lit-gauge) ",
   "license": "MIT",
   "author": "Ron Gilchrist (thewebkid)",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "type": "module",
   "main": "index.js",
   "module": "index.js",
@@ -16,7 +16,8 @@
     "web-component",
     "lit",
     "gauge",
-    "telemetry","lit-element"
+    "telemetry",
+    "lit-element"
   ],
   "repository": {
     "type": "git",
