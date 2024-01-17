@@ -1,5 +1,5 @@
 # \<lit-gauge> [![npm version](https://badge.fury.io/js/lit-gauge.svg)](https://badge.fury.io/js/lit-gauge) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-<img alt="Four Lit Gauge Implementation Examples" src="https://thewebkid.com/lit-gauges.png?v=3" width=600>
+<img alt="Four Lit Gauge Implementation Examples" src="https://thewebkid.com/lit-gauges.png" width=600>
 A snazzy gauge web component to visualize telemetry. Roll/style your own gauge at the link below:
 
 [Live demo and configuration / style editor](https://thewebkid.com/modules/lit-gauge/)

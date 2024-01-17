@@ -1,1 +1,1 @@
-export { LitGauge } from './src/LitGauge.js';
+export { LitGauge } from './dist/index.js';
