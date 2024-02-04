@@ -3,13 +3,12 @@
   "description": "An experimental gauge Web component (lit-gauge) ",
   "license": "MIT",
   "author": "Ron Gilchrist (thewebkid)",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "type": "module",
   "main": "index.js",
   "module": "index.js",
   "exports": {
-    ".": "./index.js",
-    "./lit-gauge.js": "./lit-gauge.js"
+    ".": "./index.js"
   },
   "homepage": "https://thewebkid.com/modules/lit-gauge",
   "keywords": [
@@ -47,7 +46,7 @@
     "eslint": "^8.54.0",
     "eslint-plugin-lit-a11y": "^1.1.0-next.1",
     "husky": "^4.3.8",
-    "vite": "^5.0.11"
+    "vite": "^5.0.12"
   },
   "customElements": "custom-elements.json"
 }

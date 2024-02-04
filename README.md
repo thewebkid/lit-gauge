@@ -124,8 +124,7 @@ These are the styles used to create the example screenshot in sequence
 ```html
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Mina&family=Jost&family=Outfit&family=Kalam">
-<style>
-    
+<style>    
     #lg1{
       --outer-color: #000;
       --hand-color: white;
@@ -175,5 +174,3 @@ npm i
 npm dev
 ```
 
-## Need more help?
-I am open to work if you need a dev like me. Snatch me up. My portfolio and the link to my LinkedIn are on https://thewebkid.com :)
